@@ -67,7 +67,7 @@ namespace JWTAuth.Controllers
                 _config["Jwt:Issuer"],
                 null,
                 claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddSeconds(15),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
