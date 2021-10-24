@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using DBAccessLibrary.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,6 +56,8 @@ namespace JWTAuth
                     //.AllowCredentials()
                     .Build());
             });
+            
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
