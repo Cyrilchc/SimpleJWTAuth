@@ -1,8 +1,8 @@
 # SimpleJWTAuth
 
-Projet à réutiliser si un authentification simple est à mettre en place
+Projet à réutiliser si une authentification simple est à mettre en place
 
-Pour me rappeler : elle montre de manière basique les concepts suivants :
+Pour me rappeler : elle montre de manière basique les éléments suivants :
 
 * Comment protéger une api en demandant un jwt
 * Comment fournir des jwt
@@ -10,7 +10,8 @@ Pour me rappeler : elle montre de manière basique les concepts suivants :
 * Comment authentifier un individu 
     * Vérification des entrées (Mail, mdp)
     * Comparaison du hash...
-* Pratique d'orm 
+* Le chiffrement de mot de passe
+* L'utilisation d'orm (dapper)
 
 
 ## TODO
