@@ -60,7 +60,7 @@ namespace DBAccessLibrary.Queries
         /// <returns></returns>
         public Task InserUser(DataUserModel userModel)
         {
-            string sql = @"insert into user (givenname, familyname, email, secret, salt) values (@GivenName, @FamilyName, @Email, @Password, @Salt)";
+            string sql = @"insert into user (givenname, familyname, email, password, salt) values (@GivenName, @FamilyName, @Email, @Password, @Salt)";
             return _db.SaveData(sql, userModel);
         }
     }

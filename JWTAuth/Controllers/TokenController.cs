@@ -46,6 +46,10 @@ namespace JWTAuth.Controllers
             {
                 var tokenString = BuildToken(user);
                 response = Ok(new {token = tokenString});
+                
+                // insère le jeton en base de données.
+                TokenData tokenData = new TokenData(_db);
+                await tokenData.InsertToken(new DataGeneratedTokenModel() {Token = tokenString});
             }
 
             return response;
@@ -95,12 +99,9 @@ namespace JWTAuth.Controllers
 
             // Insère en baseRegister
             await userData.InserUser(newUser);
-
-            // Renvoie une réponse created
-            newUser.Password = string.Empty;
-            newUser.Salt = string.Empty;
-            string url = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}/api/Token/GetToken";
-            return Created(url, newUser);
+            
+            // Renvoie no content
+            return NoContent();
         }
 
         private string BuildToken(UserModel user)

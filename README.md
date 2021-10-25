@@ -12,8 +12,8 @@ Pour me rappeler : elle montre de manière basique les éléments suivants :
     * Comparaison du hash...
 * Le chiffrement de mot de passe
 * L'utilisation d'orm (dapper)
+* Vérification de l'authenticité du jeton (Vérifie que le jeton reçu a été délivré par mon système - Source : https://stackoverflow.com/a/30903398/10506880)
 
 
 ## TODO
-- Voir comment gérer le rafraichissement de jeton
-- éventuellement s'assurer que le jeton reçu a été précédemment fabriqué par mon service pour éviter les fraudes : https://stackoverflow.com/a/30903398/10506880
+- Ajouter le refresh token
