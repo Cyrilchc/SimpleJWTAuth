@@ -62,7 +62,7 @@ namespace JWTServer.Controllers
             // Removes the old token + refreshToken to prevent user to reuse it to ask for another refresh
             _context.AccessTokens.Remove(token);
 
-            // Create new tokens
+            // Create new tokens 
             var tokenString = _jwtHelpers.BuildTokenWithClaims(jwtToken.Claims, _config);
             TokenModel newTokenModel = new TokenModel
             {
