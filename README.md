@@ -14,3 +14,9 @@ Une api crud de test nécessitant une autorisation et paramétrée avec l'api pr
 Les deux apis fournissent un swagger
 
 ![demo](jwt.gif)
+
+## Données
+
+Les données sont gérées avec entityframework qui utilise un connecteur pour mysql
+
+Modifier la chaine de connexion et le connecteur en fonction du besoin
