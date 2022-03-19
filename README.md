@@ -1,19 +1,16 @@
 # SimpleJWTAuth
 
-Projet à réutiliser si une authentification simple est à mettre en place
+Implémentation d'autorisation par json web token 
 
-Pour me rappeler : elle montre de manière basique les éléments suivants :
+Contient : 
 
-* Comment protéger une api en demandant un jwt
-* Comment fournir des jwt
-* Comment enregistrer un utilisateur TODO => Voir si l'enregistrement du sel est une bonne pratique
-* Comment authentifier un individu 
-    * Vérification des entrées (Mail, mdp)
-    * Comparaison du hash...
-* Le chiffrement de mot de passe
-* L'utilisation d'orm (dapper)
-* Vérification de l'authenticité du jeton (Vérifie que le jeton reçu a été délivré par mon système - Source : https://stackoverflow.com/a/30903398/10506880)
+Une api fournissant : 
+* Une route permettant l'enregistrement d'un compte utilisateur
+* Une route pour l'obtention d'un token + refresh token
+* Une route permettant le rafraichissement du jeton
 
+Une api crud de test nécessitant une autorisation et paramétrée avec l'api précédente comme emetteur de jwt
 
-## TODO
-- Ajouter le refresh token
+Les deux apis fournissent un swagger
+
+![demo](jwt.gif)
