@@ -1,10 +1,8 @@
 ﻿using JWTData;
 using JWTModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace JWTServer.Controllers
 {
@@ -47,7 +45,7 @@ namespace JWTServer.Controllers
         /// </summary>
         [HttpPost]
         [Route("Refresh")]
-        public async Task<IActionResult> Refresh([FromBody] TokenModel tokenModel)
+        public async Task<IActionResult> RefreshToken([FromBody] TokenModel tokenModel)
         {
             // Check that token + refreshToken exists
             TokenModel token = _context.AccessTokens.

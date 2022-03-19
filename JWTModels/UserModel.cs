@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JWTModels
+﻿namespace JWTModels
 {
     public class UserModel
     {

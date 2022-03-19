@@ -1,16 +1,14 @@
 ﻿using JWTModels;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JWTData
 {
     public class PasswordHasher
     {
+        /// <summary>
+        /// Hash password with random salt
+        /// </summary>
         public static HashedPasswordModel HashPassword(string password)
         {
             HashedPasswordModel hashedPasswordModel = new HashedPasswordModel();
@@ -32,6 +30,9 @@ namespace JWTData
             return hashedPasswordModel;
         }
 
+        /// <summary>
+        /// Hash password with provided salt
+        /// </summary>
         public static HashedPasswordModel HashPasswordWithSalt(string password, string salt)
         {
             HashedPasswordModel hashedPasswordModel = new HashedPasswordModel();
