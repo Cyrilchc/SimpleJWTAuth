@@ -51,6 +51,7 @@ public class Startup
             options.ClaimsIdentity.UserIdClaimType = Claims.Subject;
             options.ClaimsIdentity.RoleClaimType = Claims.Role;
             options.ClaimsIdentity.EmailClaimType = Claims.Email;
+            options.ClaimsIdentity.RoleClaimType = Claims.Role;
 
             // Note: to require account confirmation before login,
             // register an email sender service (IEmailSender) and

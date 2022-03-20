@@ -25,21 +25,21 @@ public class Worker : IHostedService
 
         var manager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
 
-        if (await manager.FindByClientIdAsync("mvc") == null)
+        if (await manager.FindByClientIdAsync("BlazorClient") == null)
         {
             await manager.CreateAsync(new OpenIddictApplicationDescriptor
             {
-                ClientId = "mvc",
-                ClientSecret = "901564A5-E7FE-42CB-B10D-61EF6A8F3654",
+                ClientId = "BlazorClient",
+                ClientSecret = "10676513-8abe-41d8-8148-c3e1774fbb13",
                 ConsentType = ConsentTypes.Explicit,
-                DisplayName = "MVC client application",
+                DisplayName = "BlazorClient",
                 PostLogoutRedirectUris =
                 {
-                    new Uri("https://localhost:44338/signout-callback-oidc")
+                    new Uri("https://localhost:5001/signout-callback-oidc")
                 },
                 RedirectUris =
                 {
-                    new Uri("https://localhost:44338/signin-oidc")
+                    new Uri("https://localhost:5001/signin-oidc")
                 },
                 Permissions =
                 {
