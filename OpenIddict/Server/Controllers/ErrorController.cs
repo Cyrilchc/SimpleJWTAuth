@@ -6,9 +6,9 @@
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using Velusia.Server.ViewModels.Shared;
+using Server.ViewModels.Shared;
 
-namespace Velusia.Server.Controllers;
+namespace Server.Controllers;
 
 public class ErrorController : Controller
 {

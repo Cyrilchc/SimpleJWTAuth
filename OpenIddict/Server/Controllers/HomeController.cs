@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Velusia.Server.Controllers;
+namespace Server.Controllers;
 
 public class HomeController : Controller
 {

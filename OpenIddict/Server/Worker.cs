@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenIddict.Abstractions;
-using Velusia.Server.Data;
+using Server.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace Velusia.Server;
+namespace Server;
 
 public class Worker : IHostedService
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Velusia.Server.ViewModels.Shared;
+namespace Server.ViewModels.Shared;
 
 public class ErrorViewModel
 {

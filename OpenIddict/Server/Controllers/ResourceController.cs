@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Validation.AspNetCore;
-using Velusia.Server.Data;
+using Server.Data;
 
-namespace Velusia.Server.Controllers;
+namespace Server.Controllers;
 
 [Route("api")]
 public class ResourceController : Controller

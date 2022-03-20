@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.EntityFrameworkCore.Models;
 
-namespace Velusia.Server.Data;
+namespace Server.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {

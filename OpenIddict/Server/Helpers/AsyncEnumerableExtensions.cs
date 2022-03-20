@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Velusia.Server.Helpers;
+namespace Server.Helpers;
 
 public static class AsyncEnumerableExtensions
 {

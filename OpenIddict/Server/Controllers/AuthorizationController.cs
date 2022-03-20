@@ -18,12 +18,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
-using Velusia.Server.Data;
-using Velusia.Server.Helpers;
-using Velusia.Server.ViewModels.Authorization;
+using Server.Data;
+using Server.Helpers;
+using Server.ViewModels.Authorization;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace Velusia.Server.Controllers;
+namespace Server.Controllers;
 
 public class AuthorizationController : Controller
 {
