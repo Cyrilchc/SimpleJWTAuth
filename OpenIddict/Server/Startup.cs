@@ -9,6 +9,7 @@ using Quartz;
 using System;
 using Server.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Server;
 
@@ -51,7 +52,6 @@ public class Startup
             options.ClaimsIdentity.UserIdClaimType = Claims.Subject;
             options.ClaimsIdentity.RoleClaimType = Claims.Role;
             options.ClaimsIdentity.EmailClaimType = Claims.Email;
-            options.ClaimsIdentity.RoleClaimType = Claims.Role;
 
             // Note: to require account confirmation before login,
             // register an email sender service (IEmailSender) and
@@ -93,8 +93,10 @@ public class Startup
                 // Enable the authorization, logout, token and userinfo endpoints.
                 options.SetAuthorizationEndpointUris("/connect/authorize")
                        .SetLogoutEndpointUris("/connect/logout")
+                       .SetIntrospectionEndpointUris("/connect/introspect")
                        .SetTokenEndpointUris("/connect/token")
-                       .SetUserinfoEndpointUris("/connect/userinfo");
+                       .SetUserinfoEndpointUris("/connect/userinfo")
+                       .SetVerificationEndpointUris("/connect/verify");
 
                 // Mark the "email", "profile" and "roles" scopes as supported scopes.
                 options.RegisterScopes(Scopes.Email, Scopes.Profile, Scopes.Roles);

@@ -24,6 +24,7 @@ public class Worker : IHostedService
         await context.Database.EnsureCreatedAsync();
 
         var manager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
+        var scopeManager = scope.ServiceProvider.GetRequiredService<IOpenIddictScopeManager>();
 
         if (await manager.FindByClientIdAsync("BlazorClient") == null)
         {
@@ -57,6 +58,31 @@ public class Worker : IHostedService
                 Requirements =
                 {
                     Requirements.Features.ProofKeyForCodeExchange
+                }
+            });
+
+            if (await manager.FindByClientIdAsync("resource_server") is null)
+            {
+                await manager.CreateAsync(new OpenIddictApplicationDescriptor
+                {
+                    ClientId = "resource_server",
+                    ClientSecret = "9de4581a-c511-4fec-9b03-6523182b27eb",
+                    Permissions =
+                {
+                    Permissions.Endpoints.Introspection
+                }
+                });
+            }
+        }
+
+        if (await scopeManager.FindByNameAsync("demo_api") is null)
+        {
+            await scopeManager.CreateAsync(new OpenIddictScopeDescriptor
+            {
+                Name = "demo_api",
+                Resources =
+                {
+                    "resource_server"
                 }
             });
         }

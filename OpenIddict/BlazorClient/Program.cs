@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
+using Yarp.ReverseProxy.Transforms;
+using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +41,7 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("profile");
     options.Scope.Add("email");
     options.Scope.Add("roles");
+    options.Scope.Add("demo_api");
 
     options.MapInboundClaims = false;
 
@@ -46,10 +49,29 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters.RoleClaimType = "role";
 });
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-//});
+builder.Services.AddAuthorization(options => options.AddPolicy("CookieAuthenticationPolicy", builder =>
+{
+    builder.AddAuthenticationSchemes(CookieAuthenticationDefaults.AuthenticationScheme);
+    builder.RequireAuthenticatedUser();
+}));
+
+builder.Services.AddReverseProxy()
+             .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+             .AddTransforms(builder => builder.AddRequestTransform(async context =>
+             {
+                 // Attach the access token retrieved from the authentication cookie.
+                 //
+                 // Note: in a real world application, the expiration date of the access token
+                 // should be checked before sending a request to avoid getting a 401 response.
+                 // Once expired, a new access token could be retrieved using the OAuth 2.0
+                 // refresh token grant (which could be done transparently).
+                 var token = await context.HttpContext.GetTokenAsync("access_token");
+
+                 context.ProxyRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+             }));
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<HttpClient>();
 
 
 var app = builder.Build();

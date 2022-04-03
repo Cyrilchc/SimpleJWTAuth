@@ -1,5 +1,11 @@
 ﻿@page "/"
 @using System.Security.Claims
+@using Microsoft.AspNetCore.Authentication
+@using BlazorClient
+@using System.Text.Json
+@using Newtonsoft.Json
+@inject IHttpContextAccessor httpContextAccessor
+@inject HttpClient httpClient
 
 <PageTitle>Index</PageTitle>
 
@@ -10,9 +16,23 @@ Welcome to your new app.
 <AuthorizeView>
     <Authorized>
         <p>Autorisé</p>
-        @foreach(Claim claim in @context.User.Claims)
+        @foreach (Claim claim in @context.User.Claims)
         {
             <p>@($"{claim.Type} : {claim.Value}")</p>
+        }
+
+        <button class="btn btn-primary" @onclick="GetForecasts">Obtenir la météo</button>
+
+        @foreach (WeatherForecast weatherForecast in Forecast)
+        {
+            <p>@weatherForecast.Summary @weatherForecast.Date @weatherForecast.TemperatureC</p>
+        }
+
+        @if (!string.IsNullOrEmpty(error))
+        {
+            <p style="color:red">
+                @error
+            </p>
         }
     </Authorized>
     <NotAuthorized>
@@ -20,9 +40,28 @@ Welcome to your new app.
     </NotAuthorized>
 </AuthorizeView>
 
-@code{
-    protected override void OnInitialized()
+@code {
+    List<WeatherForecast> Forecast = new List<WeatherForecast>();
+    string error = string.Empty;
+
+    private async void GetForecasts()
     {
-        base.OnInitialized();
+        if (!httpClient.DefaultRequestHeaders.Contains("Authorization"))
+        {
+            var token = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+        }
+
+        var callRes = await httpClient.GetAsync($"https://localhost:5002/WeatherForecast");
+        if (callRes.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            string content = await callRes.Content.ReadAsStringAsync();
+            Forecast = JsonConvert.DeserializeObject<IEnumerable<WeatherForecast>>(content).ToList();
+        }
+        else
+        {
+            error = $"{callRes.StatusCode} {callRes.ReasonPhrase}";
+        }
+        StateHasChanged();
     }
 }
