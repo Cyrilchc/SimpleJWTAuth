@@ -10,8 +10,20 @@ namespace JWTData
 
         private string DbPath { get; }
 
-        public Context() => DbPath = "server=localhost;user=root;database=jwt;password=;";
+        public Context()
+        {
+            var folder = Environment.SpecialFolder.LocalApplicationData;
+            var path = Environment.GetFolderPath(folder);
+            DbPath = Path.Join(path, "jwtdata.db");
+        }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseMySql(DbPath, new MySqlServerVersion(new Version(5, 7, 36)));
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlite($"Data Source={DbPath}");
+        }
+        
+        //public Context() => DbPath = "server=localhost;user=root;database=jwt;password=;";
+
+        // protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseMySql(DbPath, new MySqlServerVersion(new Version(5, 7, 36)));
     }
 }

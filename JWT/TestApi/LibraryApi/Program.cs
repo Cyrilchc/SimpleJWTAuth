@@ -27,7 +27,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = builder.Configuration["Jwt:Issuer"], // https://stackoverflow.com/a/69722959
             ValidAudience = builder.Configuration["Jwt:Issuer"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-            //ClockSkew = TimeSpan.Zero // Sert à enlever le décalage de temps sur les expirations courtes : https://stackoverflow.com/a/67677801/10506880
+            //ClockSkew = TimeSpan.Zero // Sert ï¿½ enlever le dï¿½calage de temps sur les expirations courtes : https://stackoverflow.com/a/67677801/10506880
         };
     });
 
@@ -58,5 +58,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers().RequireAuthorization();
+//app.MapControllers();
 
 app.Run();
